@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-<project name="sdelab08" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="assignment-3-server" default="compile" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- PART 1: Ivy properties, download, installation and configuration -->
 	<property name="ivy.install.version" value="2.4.0" />
@@ -53,7 +53,7 @@
 
 	<!-- PART 2: General properties definitions -->
 	<property name="build.dir" value="build" />
-	<property name="src.dir" value="Examples/src" />
+	<property name="src.dir" value="src" />
 	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
 	<property name="web.dir" value="." />
 
@@ -91,10 +91,6 @@
 		<echo message="Clean has been called" />
 		<delete dir="${build.dir}" />
 		<echo message="${build.dir} has been deleted" />
-		<delete dir="${src.dir}/${xjc.package}" />
-		<echo message="${src.dir}/${xjc.package} has been deleted" />
-		<delete file="catalog.xml" />
-		<echo message="catalog.xml has been deleted" />
 	</target>
 
 	<target name="compile" depends="init">
@@ -106,11 +102,17 @@
 				<include name="*.xml" />
 			</fileset>
 		</copy>
+		<mkdir dir="${web.dir}/WebContent/WEB-INF/classes/META-INF" />
+		<copy todir="${web.dir}/WebContent/WEB-INF/classes/META-INF" overwrite="true">
+			<fileset dir="${src.dir}/META-INF">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
 	</target>
 
 	<!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder --> 
 	<target name="create.war" depends="compile">
-		<war destfile="sdelab09.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+		<war destfile="assignment-3-server.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
 			<fileset dir="${web.dir}/WebContent">
 				<include name="**/*.*"/>
 			</fileset>
