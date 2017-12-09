@@ -1,6 +1,7 @@
 package introsde.assignment3.soap.ws;
 import introsde.assignment3.soap.dao.ActivityDao;
 import introsde.assignment3.soap.dao.ActivityTypeDao;
+import introsde.assignment3.soap.dao.DatabaseDao;
 import introsde.assignment3.soap.dao.PersonDao;
 import introsde.assignment3.soap.model.Activity;
 import introsde.assignment3.soap.model.ActivityType;
@@ -16,7 +17,14 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "introsde.assignment3.soap.ws.People",
     serviceName="PeopleService")
 public class PeopleImpl implements People {
-
+	
+	//init
+	@Override
+	public void init() {
+		DatabaseDao.instance.DropDB();
+    	DatabaseDao.instance.Init();
+	}
+	
 	//1
     @Override
     public Person readPerson(long id) {

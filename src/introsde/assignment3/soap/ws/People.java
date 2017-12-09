@@ -15,10 +15,15 @@ import javax.jws.soap.SOAPBinding.Use;
 @WebService
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL) //optional
 public interface People {
-//1
+//init
+    @WebMethod(operationName="init")
+    @WebResult(name="people") 
+    public void init();
+ //1
     @WebMethod(operationName="readPersonList")
     @WebResult(name="people") 
     public List<Person> readPersonList();
+    
 //2
     @WebMethod(operationName="readPerson")
     @WebResult(name="person") 
