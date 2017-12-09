@@ -11,7 +11,8 @@ public class PeoplePublisher {
     public static String BASE_URL = "/ws/people";
 
     public static String getEndpointURL() {
-        return SERVER_URL+":"+PORT+BASE_URL;
+        //return SERVER_URL+":"+PORT+BASE_URL;
+        return SERVER_URL+":"+System.getenv("PORT")+BASE_URL;
     }
 
     public static void main(String[] args) {
